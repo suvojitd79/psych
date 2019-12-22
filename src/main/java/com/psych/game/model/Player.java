@@ -4,22 +4,18 @@ package com.psych.game.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Entity
-@JsonIgnoreProperties(value = {"id"})
-@Table(name = "players")
-public class Player{
+@Table(name = "players", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
+public class Player extends Human{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter @Setter
-    private Long id;
-
-    @NotNull
-    @Getter @Setter
+    @NotBlank
+    @Getter
+    @Setter
     private String email;
 
 }
